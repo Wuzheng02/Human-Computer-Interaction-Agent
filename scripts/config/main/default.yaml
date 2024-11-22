@@ -1,0 +1,74 @@
+# ===================
+# ====== task ======
+# ===================
+task_set: "general" # "general" or "webshop"
+task_split: "test" # "train" or "test"
+eval_sample_mode: "sequential" # "random" or "sequential"
+# max_steps of AitW General should be 10; of AitW Web Shopping should
+max_steps: 10
+
+# ===================
+# ====== token ======
+# ===================
+huggingface_token: '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'
+wandb_key: 'd3daec12379e4b9a51fb27bc050e7e2c214c60ad'
+gemini_key: 'AIzaSyA_OjTF-CTX3ifa_0U5tJY-mrvEy5n6ZMA'
+
+# ===================
+# ====== algo ======
+# ===================
+
+
+#policy_lm: '/data2/models/Qwen2-VL-7B-Instruct' 
+#policy_lm: '/data2/models/OS_ATlas_Base_7B'
+policy_lm: '/data2/models/OS_ATlas_Pro_7B'
+#policy_lm: '/data2/models/saves/'
+
+
+#policy_lm: '/data/home/wuzh/autoui/Auto-UI-Base'
+critic_lm: '/data1/wuzh/.cache/roberta-base'
+capacity: 2000 # replay buffer size
+epochs: 5 # number of epochs for the critic each witeration
+batch_size: 4
+bsize: 1 # number of emulators parallelly on the machine
+rollout_size: 16 # how many trajectories to collect between training iterations (should be multiple of bsize)
+grad_accum_steps: 32
+warmup_iter: 0 # how many iterations to only collect data and evaluate before training
+actor_epochs: 20 # number of epochs for training the actor each iteration
+trajectory_critic_epochs: 5
+lm_lr: 1e-4
+critic_lr: 1e-4
+max_grad_norm: 0.01
+gamma: 0.5
+
+# ===================
+# ====== agent ======
+# ===================
+use_lora: False
+#agent_name: "cogagent"
+agent_name: "Qwen"
+#agent_name: "autoui" # "autoui" or "cogagent" >>> the eval method must be "autoui" if train_algorithm is not none <<<
+do_sample: True
+temperature: 1.0
+tau: 0.01 #soft update parameter
+max_new_tokens: 128
+
+# ===================
+# ====== log ======
+# ===================
+record: False # whether you want to record mp4 videos
+use_wandb: True
+entity_name: ''
+project_name: ''
+
+# ===================
+# ====== path ======
+# ===================
+# query by: echo $ANDROID_AVD_HOME
+android_avd_home: '/data1/wuzh/.android/avd'
+# query by: which emulator
+emulator_path: '/data1/wuzh/.android/emulator/emulator'
+# query by: which adb
+adb_path: '/data1/wuzh/.android/platform-tools/adb'
+cache_dir: '/data1/wuzh/.cache'
+assets_path: '/data1/wuzh/digirl/digirl/environment/android/assets/task_set'
